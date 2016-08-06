@@ -20,8 +20,6 @@ function createDeck() {
     return arr;
 }
 
-var deck = createDeck();
-
 function randomInteger(min, max) {
     var rand = min - 0.5 + Math.random() * (max - min + 1);
     rand = Math.round(rand);
@@ -101,34 +99,35 @@ function showHand(hand) {
 }
 
 function howMany() {
+    var deck = [];
     rl.question('How many packs in deck? (default: 1)', (answer) => {
-        var rolf = createDeck();
-        deck = [];
         if (answer ==''){
-            deck.push(createDeck());
+            deck = createDeck();
         } else {
             for (; answer > 0; answer--){
-                for (var i = 0; i < rolf.length; i++){
-                    deck.push(rolf[i]);
+                for (var i = 0; i < createDeck().length; i++){
+                    deck[i] = createDeck();
                 }
             }
         }
     });
+    console.log(deck);
+    return deck;
 }
 
 function checkWin(playershand, opphand) {
     if (countPoints(playershand) > 21){
-        console.log('lost');
+        console.log('lost'); startAGame();
     } else if(countPoints(opphand) > 21){
-        console.log('win');
+        console.log('win'); startAGame();
     } else if (countPoints(opphand) == 21){
-        console.log('lost');
+        console.log('lost'); startAGame();
     } else if (countPoints(playershand) == 21){
-        console.log('win');
+        console.log('win'); startAGame();
     }
 }
 
-function hitMe(hand) {
+function hitMe(hand, deck) {
     var j = drawACard(deck);
     hand.push(deck[j]);
     deck.splice(deck[j], 1);
@@ -159,31 +158,34 @@ function showRes(playershand, opphand) {
 }
 
 function startAGame() {
+    var deck = createDeck();
     var playershand = createAHand(deck);
     var opphand = createAHand(deck);
+    console.log('\n--------------------------');
     showRes(playershand, opphand);
     console.log('Type "hit" to draw a card \n"stop" if it`s ok');
     checkWin(playershand, opphand);
     rl.on('line', (ans) =>{
         switch (ans){
             case 'hit':
-                playershand = hitMe(playershand);
+                playershand = hitMe(playershand, deck);
                 console.log('your hand: ' + showHand(playershand) + '\r\n score: ' + countPoints(playershand));
                 checkWin(playershand, opphand);
                 break;
             case 'stop':
-                if (countPoints(opphand) < 17 && (countPoints(opphand) < countPoints(playershand))){
-                    opphand = hitMe(opphand);
+                while (countPoints(opphand) < 21 && (countPoints(opphand) < countPoints(playershand))) {
+                    opphand = hitMe(opphand, deck);
                     console.log('your opp draw');
                     console.log('opp hand: ' + showHand(opphand) + '\r\n score: ' + countPoints(opphand));
                 }
-                console.log('\n');
+                console.log('\n-----------');
                 showRes(playershand, opphand);
                 if(isWin(playershand,opphand)){
                     console.log('win!');
                 } else {
                     console.log('lost!');
                 }
+                startAGame();
         }
     });
 }
@@ -199,4 +201,4 @@ rl.on('line', (ans) => {
     }
 });
 
-console.log('Type "go" for a game \n"packs" for changing number of packs in the deck');
+console.log('Type "go" for a game \n"packs" for changing number of packs in the deck, but only if you like errors');
