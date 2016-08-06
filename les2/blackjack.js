@@ -36,7 +36,7 @@ var createAHand = function (deck) {
     for (var i = 0; i < 2; i++){
         var j = drawACard(deck);
         arr.push(deck[j]);
-        deck.splice(deck[j], 1);
+ //       deck.splice(deck[j], 1);
     }
     return arr;
 };
@@ -195,10 +195,10 @@ rl.on('line', (ans) => {
         case 'go':
             startAGame();
             break;
-        case 'packs':
+/*        case 'packs':
             howMany();
-            break;
+            break;*/
     }
 });
 
-console.log('Type "go" for a game \n"packs" for changing number of packs in the deck, but only if you like errors');
+console.log('Type "go" for a game \nUses infinite deck');
