@@ -91,11 +91,9 @@ function countPoints(hand) {
 }
 
 function showHand(hand) {
-    var str = [];
-    for (var i = 0; i < hand.length; i++){
-        str.push(hand[i].face + ' ' + hand[i].suit);
-    }
-    return str.join(', ');
+    return hand.map(function (card) {
+        return card.face + ' ' + card.suit;
+    }).join(', ');
 }
 
 /*function howMany() {
@@ -128,8 +126,11 @@ function checkWin(playershand, opphand) {
 }
 
 function hitMe(hand, deck) {
-    var j = drawACard(deck);
-    hand.push(deck[j]);
+    var i = -1;
+    while (i < 0 || i > 52){
+        i = drawACard(deck);
+    }
+    hand.push(deck[i]);
 //    deck.splice(deck[j], 1);
     return hand;
 }
@@ -154,7 +155,7 @@ function showRes(playershand, opphand) {
 }
 
 function startAGame() {
-    var deck = createDeck();
+    const deck = createDeck();
     var playershand = createAHand(deck);
     var opphand = createAHand(deck);
     console.log('\n--------------------------');
@@ -198,3 +199,4 @@ rl.on('line', (ans) => {
 });
 
 console.log('Type "go" for a game \nUses infinite deck');
+
