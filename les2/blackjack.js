@@ -20,6 +20,8 @@ function createDeck() {
     return arr;
 }
 
+var deck = createDeck();
+
 function randomInteger(min, max) {
     var rand = min - 0.5 + Math.random() * (max - min + 1);
     rand = Math.round(rand);
@@ -30,7 +32,6 @@ function drawACard(deck) {
     return randomInteger(0, deck.length);
 }
 
-var deck = createDeck();
 
 var createAHand = function (deck) {
     var arr = [];
@@ -50,9 +51,6 @@ const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 });
-
-
-
 
 function countPoints(hand) {
     var points = 0;
@@ -102,13 +100,6 @@ function showHand(hand) {
     return str.join(', ');
 }
 
-function startAGame() {
-    var playershand = createAHand(deck);
-    var opphand = createAHand(deck);
-    console.log('your hand: ' + showHand(playershand) + '\r\n score: ' + countPoints(playershand));
-    console.log('opp hand: ' + showHand(opphand) + '\r\n score: ' + countPoints(opphand));
-}
-
 function howMany() {
     rl.question('How many packs in deck? (default: 1)', (answer) => {
         var rolf = createDeck();
@@ -125,9 +116,77 @@ function howMany() {
     });
 }
 
+function checkWin(playershand, opphand) {
+    if (countPoints(playershand) > 21){
+        console.log('lost');
+    } else if(countPoints(opphand) > 21){
+        console.log('win');
+    } else if (countPoints(opphand) == 21){
+        console.log('lost');
+    } else if (countPoints(playershand) == 21){
+        console.log('win');
+    }
+}
 
+function hitMe(hand) {
+    var j = drawACard(deck);
+    hand.push(deck[j]);
+    deck.splice(deck[j], 1);
+    return hand;
+}
 
+function isWin(playershand, opphand) {
+    if (countPoints(playershand) > 21){
+        return false;
+    } else if(countPoints(opphand) > 21){
+        return true;
+    } else if (countPoints(opphand) == 21){
+        return false;
+    } else if (countPoints(playershand) == 21){
+        return true;
+    } else if (countPoints(playershand) > countPoints(opphand)){
+        return true;
+    } else if (checkWin(playershand, opphand)){
+        return true;
+    } else {
+        return false;
+    }
+}
 
+function showRes(playershand, opphand) {
+    console.log('your hand: ' + showHand(playershand) + '\r\n score: ' + countPoints(playershand));
+    console.log('opp hand: ' + showHand(opphand) + '\r\n score: ' + countPoints(opphand));
+}
+
+function startAGame() {
+    var playershand = createAHand(deck);
+    var opphand = createAHand(deck);
+    showRes(playershand, opphand);
+    console.log('Type "hit" to draw a card \n "stop" if it`s ok');
+    checkWin(playershand, opphand);
+    rl.on('line', (ans) =>{
+        switch (ans){
+            case 'hit':
+                playershand = hitMe(playershand);
+                console.log('your hand: ' + showHand(playershand) + '\r\n score: ' + countPoints(playershand));
+                checkWin(playershand, opphand);
+                break;
+            case 'stop':
+                if (countPoints(opphand) < 17){
+                    opphand = hitMe(opphand);
+                    console.log('your opp draw');
+                    console.log('opp hand: ' + showHand(opphand) + '\r\n score: ' + countPoints(opphand));
+                }
+                console.log('\n');
+                showRes(playershand, opphand);
+                if(isWin(playershand,opphand)){
+                    console.log('win!');
+                } else {
+                    console.log('lost!');
+                }
+        }
+    });
+}
 
 rl.on('line', (ans) => {
     switch (ans){
@@ -136,5 +195,6 @@ rl.on('line', (ans) => {
             break;
         case 'packs':
             howMany();
+            break;
     }
 });
