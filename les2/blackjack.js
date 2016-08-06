@@ -198,3 +198,5 @@ rl.on('line', (ans) => {
             break;
     }
 });
+
+console.log('Type "go" for a game \n"packs" for changing number of packs in the deck');
