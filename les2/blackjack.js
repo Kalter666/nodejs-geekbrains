@@ -162,7 +162,7 @@ function startAGame() {
     var playershand = createAHand(deck);
     var opphand = createAHand(deck);
     showRes(playershand, opphand);
-    console.log('Type "hit" to draw a card \n "stop" if it`s ok');
+    console.log('Type "hit" to draw a card \n"stop" if it`s ok');
     checkWin(playershand, opphand);
     rl.on('line', (ans) =>{
         switch (ans){
@@ -172,7 +172,7 @@ function startAGame() {
                 checkWin(playershand, opphand);
                 break;
             case 'stop':
-                if (countPoints(opphand) < 17){
+                if (countPoints(opphand) < 17 && (countPoints(opphand) < countPoints(playershand))){
                     opphand = hitMe(opphand);
                     console.log('your opp draw');
                     console.log('opp hand: ' + showHand(opphand) + '\r\n score: ' + countPoints(opphand));
