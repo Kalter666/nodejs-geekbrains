@@ -9,8 +9,8 @@ function createDeck() {
         face: ["two","three","four","five","six","seven","eight","nine","ten","jack","queen","king","ace"]
     };
     var arr = [];
-    for (var i = 0; i < 13; i++){
-        for (var j = 0; j < 4; j++){
+    for (var i = 0; i < deck.face.length; i++){
+        for (var j = 0; j < deck.suit.length; j++){
             arr.push({
                 face: deck.face[i],
                 suit: deck.suit[j]
@@ -98,7 +98,7 @@ function showHand(hand) {
     return str.join(', ');
 }
 
-function howMany() {
+/*function howMany() {
     var deck = [];
     rl.question('How many packs in deck? (default: 1)', (answer) => {
         if (answer ==''){
@@ -113,7 +113,7 @@ function howMany() {
     });
     console.log(deck);
     return deck;
-}
+}*/
 
 function checkWin(playershand, opphand) {
     if (countPoints(playershand) > 21){
@@ -130,7 +130,7 @@ function checkWin(playershand, opphand) {
 function hitMe(hand, deck) {
     var j = drawACard(deck);
     hand.push(deck[j]);
-    deck.splice(deck[j], 1);
+//    deck.splice(deck[j], 1);
     return hand;
 }
 
@@ -145,11 +145,7 @@ function isWin(playershand, opphand) {
         return true;
     } else if (countPoints(playershand) > countPoints(opphand)){
         return true;
-    } else if (checkWin(playershand, opphand)){
-        return true;
-    } else {
-        return false;
-    }
+    } else return !!checkWin(playershand, opphand);
 }
 
 function showRes(playershand, opphand) {
