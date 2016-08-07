@@ -2,6 +2,7 @@
  * Created by kalte on 8/6/2016.
  */
 
+process.setMaxListeners(0);
 
 function createDeck() {
     var deck = {
@@ -27,7 +28,7 @@ function randomInteger(min, max) {
 }
 
 function drawACard(deck) {
-    return randomInteger(0, deck.length);
+    return randomInteger(0, deck.length - 1);
 }
 
 
@@ -36,7 +37,6 @@ var createAHand = function (deck) {
     for (var i = 0; i < 2; i++){
         var j = drawACard(deck);
         arr.push(deck[j]);
- //       deck.splice(deck[j], 1);
     }
     return arr;
 };
@@ -96,23 +96,6 @@ function showHand(hand) {
     }).join(', ');
 }
 
-/*function howMany() {
-    var deck = [];
-    rl.question('How many packs in deck? (default: 1)', (answer) => {
-        if (answer ==''){
-            deck = createDeck();
-        } else {
-            for (; answer > 0; answer--){
-                for (var i = 0; i < createDeck().length; i++){
-                    deck[i] = createDeck();
-                }
-            }
-        }
-    });
-    console.log(deck);
-    return deck;
-}*/
-
 function checkWin(playershand, opphand) {
     if (countPoints(playershand) > 21){
         console.log('lost'); startAGame();
@@ -126,12 +109,8 @@ function checkWin(playershand, opphand) {
 }
 
 function hitMe(hand, deck) {
-    var i = -1;
-    while (i < 0 || i > 52){
-        i = drawACard(deck);
-    }
+    var i = drawACard(deck);
     hand.push(deck[i]);
-//    deck.splice(deck[j], 1);
     return hand;
 }
 
@@ -192,9 +171,6 @@ rl.on('line', (ans) => {
         case 'go':
             startAGame();
             break;
-/*        case 'packs':
-            howMany();
-            break;*/
     }
 });
 
