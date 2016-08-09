@@ -1,8 +1,6 @@
-var select = '.jsTabs-content jsTabs-active';
-var url = 'http://ria.ru/';
-
-var request = require('request');
-var cheerio = require('cheerio');
+const request = require('request');
+const cheerio = require('cheerio');
+const http = require("http");
 
 var news = [];
 
@@ -15,8 +13,6 @@ request("http://ria.ru/", function (error, response, html) {
         console.log(news);
     }
 });
-
-var http = require("http");
 
 function onRequest(request, response) {
     response.writeHead(200, {"Content-Type": "text/plain"});
