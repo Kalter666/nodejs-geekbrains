@@ -13,21 +13,22 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 
-var translate = function (text) {
-    var str = url + 'key=' + key + '&text=' + text + '&lang=ru';
-    request(str, function (error, response, body) {
-        if (!error && response.statusCode == 200) {
-            console.log('Translation: ' + getTranslation(body));
-            console.log(body.toString());
-        }
-    });
-};
-
 var getTranslation = function (xml) {
     var $ = cheerio.load(xml);
     return $('text').text();
 };
 
+var translate = function (text) {
+    var str = url + 'key=' + key + '&text=' + text + '&lang=ru';
+    var res = '';
+    request(str, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            console.log('Translation: ' + getTranslation(body));
+        } else {
+            console.error(response.statusCode);
+        }
+    });
+};
 
 rl.on('line', (answer) => {
     if (answer != '') {
