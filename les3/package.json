@@ -11,5 +11,6 @@
   "dependencies": {
     "request": "latest",
     "cheerio": "latest"
-  }
+  },
+  "devDependencies": {}
 }
