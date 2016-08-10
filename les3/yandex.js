@@ -15,16 +15,16 @@ const rl = readline.createInterface({
 
 var getTranslation = function (xml) {
     var $ = cheerio.load(xml);
-    return $('text').text();
+    console.log($('text').text());
 };
 
 var translate = function (text) {
-    var str = url + 'key=' + key + '&text=' + text + '&lang=ru';
+    var str = url + 'key=' + key + '&text=' + encodeURIComponent(text) + '&lang=ru';
     request(str, function (error, response, body) {
         if (!error && response.statusCode == 200) {
-            console.log('Translation: ' + getTranslation(body));
+            getTranslation(body);
         } else {
-            console.error(response.statusCode);
+            console.error(error);
         }
     });
 };
