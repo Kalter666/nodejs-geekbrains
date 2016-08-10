@@ -20,7 +20,6 @@ var getTranslation = function (xml) {
 
 var translate = function (text) {
     var str = url + 'key=' + key + '&text=' + text + '&lang=ru';
-    var res = '';
     request(str, function (error, response, body) {
         if (!error && response.statusCode == 200) {
             console.log('Translation: ' + getTranslation(body));
