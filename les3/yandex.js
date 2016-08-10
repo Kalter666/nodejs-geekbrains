@@ -3,7 +3,7 @@
  */
 const yourkey = require('./key');
 var key = yourkey.key;
-var url = 'https://translate.yourkey.net/api/v1.5/tr/translate?';
+var url = 'https://translate.yandex.net/api/v1.5/tr/translate?';
 var request = require('request');
 const readline = require('readline');
 const cheerio = require('cheerio');
@@ -31,7 +31,6 @@ var translate = function (text) {
 
 rl.on('line', (answer) => {
     if (answer != '') {
-        console.log('Your text: ' + answer);
         translate(answer);
     } else {
         console.log('Write smth to translate');
