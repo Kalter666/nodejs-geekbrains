@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -7,12 +7,10 @@
 <body>
 <h1>{{title}}</h1>
 <form action="/" method="post" autocomplete="on">
-    <label for="posts">Posts</label>
-    <input type="radio" id="posts" name="type" value="p">
-    <label for="comments">Comments</label>
-    <input type="radio" id="comments" name="type" value="c">
-    <label for="submit">Submit</label>
-    <input type="submit" id="submit">
+    {{#each cite}}
+        {{this}} <input title="{{this}}" type="radio" name="type" value="{{this}}">
+    {{/each}}
+    <input type="submit" id="submit" value="go">
 </form>
 </body>
 </html>

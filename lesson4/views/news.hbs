@@ -1,11 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
 <h1>{{title}}</h1>
-<article>{{content}}</article>
+<main>
+    {{#each content}}
+        <p>{{this}}</p>
+    {{/each}}
+</main>
+<form action="/" method="get">
+    <input type="submit" value="return to list">
+</form>
 </body>
 </html>
