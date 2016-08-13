@@ -11,6 +11,7 @@ const template = require('consolidate');
 app.engine('hbs', template.handlebars);
 app.set('view engine', 'hbs');
 app.set('views',__dirname+'/views');
+const cookieSession = require('cookie-session');
 
 const url_ria = {
     name: 'Ria news',
@@ -25,6 +26,7 @@ const url_ya = {
 };
 
 app.get('/', (req, res) =>{
+    const sess = req.session;
     res.render('index', {
         title: 'Greetings',
         cite: [url_ria.name, url_ya.name]
