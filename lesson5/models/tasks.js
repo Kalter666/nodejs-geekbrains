@@ -1,9 +1,12 @@
 /**
  * Created by kalter on 8/14/2016.
  */
+'use strict';
+const pool = require('../config/config');
 var Tasks = {
   list: function (callback) {
-// TODO
+    const query = 'SELECT * FROM `tasks`';
+    
   },
   add: function (task, callback) {
 // TODO

@@ -9,5 +9,4 @@ const pool  = mysql.createPool({
   password        : '',
   database        : 'tasks'
 });
-
 module.exports = pool;
