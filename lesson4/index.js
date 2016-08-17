@@ -11,7 +11,6 @@ const template = require('consolidate');
 app.engine('hbs', template.handlebars);
 app.set('view engine', 'hbs');
 app.set('views', __dirname + '/views');
-const cookieSession = require('cookie-session');
 const cookieParser = require('cookie-parser');
 app.use(cookieParser());
 const url_ria = {

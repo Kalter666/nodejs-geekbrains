@@ -9,6 +9,11 @@
   "author": "iakov kosyakov",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.15.2",
+    "cheerio": "^0.20.0",
+    "consolidate": "^0.14.1",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.0",
     "mysql": "^2.11.1"
   }
 }
