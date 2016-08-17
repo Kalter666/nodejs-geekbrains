@@ -6,7 +6,6 @@ const app = express();
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: false}));
 const template = require('consolidate');
-const cheerio = require('cheerio');
 app.engine('hbs', template.handlebars);
 app.set('view engine', 'hbs');
 app.set('views', __dirname + '/views');
