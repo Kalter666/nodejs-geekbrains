@@ -1,0 +1,11 @@
+*.xml
+*.yml
+*.markdown
+node_modules/
+les3/node_modules/
+les2/node_modules/
+les1/node_modules/
+les3/key.js
+.idea/
+/lesson4/node_modules/
+/lesson5/node_modules/
