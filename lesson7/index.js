@@ -32,7 +32,7 @@ rest.post('/tasks/name/:name/text/:text/priority/:priority', (req, res) => {
     if (err) {
       return console.log(err);
     }
-    res.send({result:'ДОБАВИЛ: ', text:req.params.text, priority:req.params.priority});
+    res.send({result:'ДОБАВИЛ: ', task});
   });
 });
 
@@ -46,7 +46,7 @@ rest.put('/tasks/:id/text/:text/priority/:priority', (req, res) => {
     if (err) {
       return console.log(err);
     }
-    res.send({result:'изменил: ', text:req.params.text, priority:req.params.priority});
+    res.send({result:'изменил: ', task});
   });
 });
 
@@ -60,7 +60,7 @@ rest.put('/tasks/:id/text/:text', (req, res) => {
     if (err) {
       return console.log(err);
     }
-    res.send({result:'New task text set', text:req.params.text});
+    res.send({result:'New task text set', task});
   });
 });
 
@@ -74,7 +74,7 @@ rest.put('/tasks/:id/priority/:priority', (req, res) => {
     if (err) {
       return console.log(err);
     }
-    res.send({result:'ПРИОРИТЕТ ИЗМЕНЕН на: ', priority:req.params.priority});
+    res.send({result:'ПРИОРИТЕТ ИЗМЕНЕН на: ', task});
   });
 });
 
