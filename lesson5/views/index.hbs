@@ -5,8 +5,17 @@
     <title>{{title}}</title>
 </head>
 <body>
-{{#each tasks}}
-    <p>{{@index}}. {{this}}</p>
-{{/each}}
+<form action="/task" method="post">
+    {{#each tasks}}
+        <div>
+            {{this.id}}. {{this.name}} <input type="radio" value="{{this.id}}" title="select me">
+            <p>
+                {{this.text}}
+            </p>
+        </div>
+    {{/each}}
+    <input type="submit">
+</form>
+<a href="/add">add new</a>
 </body>
 </html>

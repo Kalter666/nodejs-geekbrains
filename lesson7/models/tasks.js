@@ -6,7 +6,7 @@ const config = require(__dirname + '/../config/config');
 const mysql = require('mysql');
 const pool = mysql.createPool(config);
 const Tasks = {
-  list: function (callback) {
+  list: callback => {
     const query = 'SELECT * FROM `tasks`';
     pool.getConnection((err, connection) => {
       connection.query(query, (err, rows) => {
@@ -16,7 +16,7 @@ const Tasks = {
       });
     });
   },
-  add: function (task, callback) {
+  add: (task, callback) => {
     const query = 'INSERT INTO `tasks` (`id`,`name`,`text`,`complete`, `priority`)' +
       'VALUES (NULL, ?, ?, ?, ?)';
     const inserts = [task.name, task.text, 0, task.priority];
@@ -28,7 +28,7 @@ const Tasks = {
       })
     });
   },
-  change: function (task, callback) {
+  change: (task, callback) => {
     const inserts = [task.id, task.name, task.text, task.priority];
     const query = mysql.format('UPDATE `tasks` WHERE `id` = ? SET `name` = ?,' +
       '`text` = ?, `complete` = ?, `priority` = ?', inserts);
@@ -40,9 +40,9 @@ const Tasks = {
       });
     });
   },
-  complete: function (task, callback) {
+  complete: (task, callback) => {
     const inserts = [task.id];
-    const query = mysql.format('UPDATE `tasks` WHERE `id` = ? SET `complete` = 1');
+    const query = mysql.format('UPDATE `tasks` WHERE `id` = ? SET `complete` = 1', inserts);
     pool.getConnection( (err, conn) => {
       conn.query(query, err => {
         if (err){
@@ -52,9 +52,9 @@ const Tasks = {
       });
     })
   },
-  delete: function (task, callback) {
+  delete: (task, callback) => {
     const inserts = [task.id];
-    const query = mysql.format('DELETE FROM `tasks` WHERE `id` = ?');
+    const query = mysql.format('DELETE FROM `tasks` WHERE `id` = ?', inserts);
     pool.getConnection( (err, conn) => {
       conn.query(query, err => {
         if (err){
