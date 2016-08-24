@@ -38,6 +38,7 @@ rest.post('/tasks/name/:name/text/:text/priority/:priority', (req, res) => {
 
 rest.put('/tasks/:id/text/:text/priority/:priority', (req, res) => {
   const task= {
+    id: req.params.id,
     name: req.params.name,
     text: req.params.text,
     priority: req.params.priority
@@ -47,34 +48,6 @@ rest.put('/tasks/:id/text/:text/priority/:priority', (req, res) => {
       return console.log(err);
     }
     res.send({result:'изменил: ', task});
-  });
-});
-
-rest.put('/tasks/:id/text/:text/priority/:priority', (req, res) => {
-  const task= {
-    name: req.params.name,
-    text: req.params.text,
-    priority: req.params.priority
-  };
-  tasks.change(task, (err) => {
-    if (err) {
-      return console.log(err);
-    }
-    res.send({result:'New task text set', task});
-  });
-});
-
-rest.put('/tasks/:id/text/:text/priority/:priority', (req, res) => {
-  const task= {
-    name: req.params.name,
-    text: req.params.text,
-    priority: req.params.priority
-  };
-  tasks.change(task, (err) => {
-    if (err) {
-      return console.log(err);
-    }
-    res.send({result:'ПРИОРИТЕТ ИЗМЕНЕН на: ', task});
   });
 });
 
