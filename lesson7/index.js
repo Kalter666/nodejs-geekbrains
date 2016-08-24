@@ -50,7 +50,7 @@ rest.put('/tasks/:id/text/:text/priority/:priority', (req, res) => {
   });
 });
 
-rest.put('/tasks/:id/text/:text', (req, res) => {
+rest.put('/tasks/:id/text/:text/priority/:priority', (req, res) => {
   const task= {
     name: req.params.name,
     text: req.params.text,
@@ -64,7 +64,7 @@ rest.put('/tasks/:id/text/:text', (req, res) => {
   });
 });
 
-rest.put('/tasks/:id/priority/:priority', (req, res) => {
+rest.put('/tasks/:id/text/:text/priority/:priority', (req, res) => {
   const task= {
     name: req.params.name,
     text: req.params.text,
